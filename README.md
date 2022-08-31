@@ -43,3 +43,16 @@ System](https://meyerweb.com/eric/tools/s5/).
 
 ## Resources & Bibliography
 
+## License information
+
+The slides a copyright (c) 2022 by David Maus and released under the terms of the [Creative Commons Attribution 4.0
+International](https://creativecommons.org/licenses/by/4.0/) license.
+
+SchXslt CLI is copyright (c) 2019–2022 by David Maus and released under the terms of the [MIT
+License](https://opensource.org/licenses/MIT). The source code is available at
+[github.com/schxslt/schxslt](https://github.com/schxslt/schxslt).
+
+The files of the [Simple Standards-Based Slide Show](https://meyerweb.com/eric/tools/s5/) are in the Public Domain.
+
+The logo of the [Schematroll](https://github.com/schematron/schematroll) was drawn by Cody Chang and is free for use on
+Schematron-related products.
