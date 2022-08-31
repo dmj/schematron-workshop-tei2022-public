@@ -1,6 +1,6 @@
 # A short Introduction to Schematron
 
-This repository contains slides, software, and examples for the half-day workshop "A short Introduction to Schematron"
+This repository contains slides, software, and exercises for the half-day workshop "A short Introduction to Schematron"
 held at the TEI Conference and Members' Meeting 2022 in Newcastle, UK.
 
 ## Abstract
