@@ -51,20 +51,20 @@ blockquote b i {font-style: italic;}
 kbd {font-weight: bold; font-size: 1em;}
 sup {font-size: smaller; line-height: 1px;}
 
-.slide code {padding: 2px 0.25em; font-weight: bold; color: #533;}
-.slide code.bad, code del {color: red;}
-.slide code.old {color: silver;}
-.slide pre {padding: 0; margin: 0.25em 0 0.5em 0.5em; color: #533; font-size: 90%;}
-.slide pre code {display: block;}
-.slide ul {margin-left: 5%; margin-right: 7%; list-style: disc;}
-.slide li {margin-top: 0.75em; margin-right: 0;}
-.slide ul ul {line-height: 1;}
-.slide ul ul li {margin: .2em; font-size: 85%; list-style: square;}
-.slide img.leader {display: block; margin: 0 auto;}
+article code {padding: 2px 0.25em; font-weight: bold; color: #533;}
+article code.bad, code del {color: red;}
+article code.old {color: silver;}
+article pre {padding: 0; margin: 0.25em 0 0.5em 0.5em; color: #533; font-size: 90%;}
+article pre code {display: block;}
+article ul {margin-left: 5%; margin-right: 7%; list-style: disc;}
+article li {margin-top: 0.75em; margin-right: 0;}
+article ul ul {line-height: 1;}
+article ul ul li {margin: .2em; font-size: 85%; list-style: square;}
+article img.leader {display: block; margin: 0 auto;}
 
 div.long {font-size: 0.75em;}
 
-.slide h1 {
+article h1 {
     position: absolute;
     top: 0.7em;
     left: 87px;
@@ -78,7 +78,7 @@ div.long {font-size: 0.75em;}
     background: white;
 }
 
-.slide h3 {
+article h3 {
     font-size: 130%;
 }
 
@@ -116,7 +116,7 @@ html>body .external {border-bottom: none;}
 
 .incremental, .incremental *, .incremental *:after {color: #DDE; visibility: visible;}
 img.incremental {visibility: hidden;}
-.slide .current {color: #B02;}
+article .current {color: #B02;}
 
 
 /* diagnostics

@@ -73,7 +73,7 @@ function nodeValue(node) {
 }
 
 function slideLabel() {
-	var slideColl = GetElementsWithClassName('*','slide');
+    var slideColl = document.querySelectorAll('article');
 	var list = document.getElementById('jumplist');
 	smax = slideColl.length;
 	for (var n = 0; n < smax; n++) {
@@ -178,7 +178,7 @@ function subgo(step) {
 }
 
 function toggle() {
-	var slideColl = GetElementsWithClassName('*','slide');
+	var slideColl = document.querySelectorAll('article');
 	var slides = document.getElementById('slideProj');
 	var outline = document.getElementById('outlineStyle');
 	if (!slides.disabled) {
@@ -204,7 +204,7 @@ function toggle() {
 }
 
 function showHide(action) {
-	var obj = GetElementsWithClassName('*','hideme')[0];
+    var obj = document.querySelector('.hideme');
 	switch (action) {
 	case 's': obj.style.visibility = 'visible'; break;
 	case 'h': obj.style.visibility = 'hidden'; break;
@@ -301,7 +301,7 @@ function clicker(e) {
 
 function findSlide(hash) {
 	var target = null;
-	var slides = GetElementsWithClassName('*','slide');
+	var slides = document.querySelectorAll('article');
 	for (var i = 0; i < slides.length; i++) {
 		var targetSlide = slides[i];
 		if ( (targetSlide.name && targetSlide.name == hash)
@@ -454,7 +454,7 @@ function notOperaFix() {
 	if (isIE && document.styleSheets && document.styleSheets[0]) {
 		document.styleSheets[0].addRule('img', 'behavior: url(ui/default/iepngfix.htc)');
 		document.styleSheets[0].addRule('div', 'behavior: url(ui/default/iepngfix.htc)');
-		document.styleSheets[0].addRule('.slide', 'behavior: url(ui/default/iepngfix.htc)');
+		document.styleSheets[0].addRule('article', 'behavior: url(ui/default/iepngfix.htc)');
 	}
 }
 
