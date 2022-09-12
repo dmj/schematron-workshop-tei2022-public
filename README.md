@@ -34,14 +34,17 @@ usage: name.dmaus.schxslt.cli.Application [-d <arg>] [-o <arg>] [-p <arg>] [-r] 
  -v,--verbose            Verbose output
 ```
 
+### XSpec 2.2.4
+
+```bin/xspec``` contains the 2.2.4 release of [XSpec](https://xspec.io), a unit test and behaviour-driven development
+(BDD) framework for XSLT, XQuery, and Schematron.
+
 ### Slides
 
 The slides of the workshop are prepared with [S5: A Simple Standards-Based Slide Show
 System](https://meyerweb.com/eric/tools/s5/).
 
 ### Excercises
-
-## Resources & Bibliography
 
 ## License information
 
@@ -52,7 +55,15 @@ SchXslt CLI is copyright (c) 2019–2022 by David Maus and released under the te
 License](https://opensource.org/licenses/MIT). The source code is available at
 [github.com/schxslt/schxslt](https://github.com/schxslt/schxslt).
 
+XSpec is copyright (c) 2008-2017 Jeni Tennison and released under the [MIT
+License](https://opensource.org/licenses/MIT). Some partd are released under the [Mozilla Public
+License](https://www.mozilla.org/en-US/MPL/). The source code is available at
+[https://github.com/xspec/xspec](https://github.com/xspec/xspec).
+
 The files of the [Simple Standards-Based Slide Show](https://meyerweb.com/eric/tools/s5/) are in the Public Domain.
+
+Syntax highlighting is done by [highlight.js](https://highlightjs.org/), available under the BSD 3-Clause License.
 
 The logo of the [Schematroll](https://github.com/schematron/schematroll) was drawn by Cody Chang and is free for use on
 Schematron-related products.
+
