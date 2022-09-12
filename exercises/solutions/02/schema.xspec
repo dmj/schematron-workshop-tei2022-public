@@ -1,0 +1,69 @@
+<xspec:description schematron="schema-01.sch"
+                   xmlns:tei="http://www.tei-c.org/ns/1.0"
+                   xmlns:xspec="http://www.jenitennison.com/xslt/xspec">
+
+  <xspec:scenario label="Referencing strings">
+    <xspec:scenario label="A rs element without a @type attribute">
+      <xspec:context>
+        <tei:rs/>
+      </xspec:context>
+      <xspec:expect-assert id="assert-type-required"/>
+    </xspec:scenario>
+    <xspec:scenario label="A rs element with a @type attribute that has an invalid value">
+      <xspec:context>
+        <tei:rs type="invalid"/>
+      </xspec:context>
+      <xspec:expect-assert id="assert-type-value"/>
+      <xspec:expect-not-assert id="assert-type-required"/>
+    </xspec:scenario>
+    <xspec:scenario label="A rs element with a @type attribute and a valid value">
+      <xspec:context>
+        <tei:rs type="person"/>
+      </xspec:context>
+      <xspec:expect-not-assert id="assert-type-required"/>
+      <xspec:expect-not-assert id="assert-type-value"/>
+    </xspec:scenario>
+    <xspec:scenario label="A rs element without a @ref attribute">
+      <xspec:context>
+        <tei:rs/>
+      </xspec:context>
+      <xspec:expect-assert id="assert-ref-required"/>
+    </xspec:scenario>
+    <xspec:scenario label="A rs element with a @ref attribute not using the 'register' private URI scheme.">
+      <xspec:context>
+        <tei:rs ref="#person"/>
+      </xspec:context>
+      <xspec:expect-not-assert id="assert-ref-required"/>
+      <xspec:expect-assert id="assert-ref-register"/>
+    </xspec:scenario>
+    <xspec:scenario label="A rs element with a @ref attribute using the 'register' private URI scheme.">
+      <xspec:context>
+        <tei:rs ref="register:person"/>
+      </xspec:context>
+      <xspec:expect-not-assert id="assert-ref-required"/>
+      <xspec:expect-not-assert id="assert-ref-register"/>
+    </xspec:scenario>
+  </xspec:scenario>
+
+  <xspec:scenario label="Correspondence descriptions">
+    <xspec:scenario label="A description with no dated action">
+      <xspec:context>
+        <tei:correspDesc>
+          <tei:correspAction/>
+        </tei:correspDesc>
+      </xspec:context>
+      <xspec:expect-assert id="assert-correspaction-date"/>
+    </xspec:scenario>
+    <xspec:scenario label="A description with a dated action">
+      <xspec:context>
+        <tei:correspDesc>
+          <tei:correspAction>
+            <tei:date/>
+          </tei:correspAction>
+        </tei:correspDesc>
+      </xspec:context>
+      <xspec:expect-not-assert id="assert-correspaction-date"/>
+    </xspec:scenario>
+  </xspec:scenario>
+
+</xspec:description>

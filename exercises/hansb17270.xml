@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="schema.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" n="HANSb17270">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Brief an Richard Dehmel</title>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>Staats- und Universitätsbibliothek Hamburg</publisher>
+                <pubPlace>Hamburg, Germany</pubPlace>
+                <date>2022</date>
+                <availability status="free">
+                    <licence target="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0
+                        Universal (CC0 1.0) Public Domain Dedication</licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>Brief an Richard Dehmel. <idno>Staats- und Universitätsbibliothek Hamburg, DA
+                        : Br : L : 913</idno></bibl>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <correspDesc ref="http://dehmel.digital/brief/HANSb17270">
+                <correspAction type="sent">
+                    <persName ref="https://d-nb.info/gnd/118572954">Liliencron, Detlev
+                        von</persName>
+                    <placeName>Hamburg-Rahlstedt</placeName>
+                    <date when="1901-06-30"/>
+                </correspAction>
+                <correspAction type="received">
+                    <persName ref="https://d-nb.info/gnd/118679236">Dehmel, Richard</persName>
+                </correspAction>
+            </correspDesc>
+        </profileDesc>
+        <encodingDesc>
+            <editorialDecl>
+                <p>Der Volltext wurde durch Verfahren der Handwritten Text Recognition (HTR) mit
+                    Transkribus erstellt.</p>
+                <p>Wörter (&lt;w&gt;) und Satzzeichen (&lt;pc&gt;) wurden durch Named Entity
+                    Recognition mit <name>XNLPipe 1.4/Stanford Core NLP 4.4.0/Modell 20 mit Liste
+                        (Sloppy)</name> ausgezeichnet.</p>
+                <p>Die XML-Auszeichnung von Wörtern (&lt;w&gt;) und Satzzeichen (&lt;pc&gt;) wurde
+                    in dieser vereinfachten Fassung entfernt. Personen, Orte, Körperschaften und
+                    Werke wurden disambiguiert und wo möglich mit Normdaten abgeglichen. Unter- und
+                    Durchstreichungen sowie unleserliche Stellen wurden aus Standoff-Annotationen in
+                    inline-Markup (&lt;sub&gt;, &lt;sup&gt;, &lt;unclear&gt;, &lt;hi&gt;)
+                    umgewandelt.</p>
+            </editorialDecl>
+            <listPrefixDef>
+                <prefixDef ident="register" matchPattern="^([a-zA-Z0-9_]+)"
+                    replacementPattern="register.xml#$1"/>
+            </listPrefixDef>
+        </encodingDesc>
+        <revisionDesc>
+            <change when="2022-06-22T10:42:45.601+02:00">TEI-Datei aus PAGE XML erstellt.</change>
+            <change when="2022-06-22T11:22:52.41+02:00">Named Entity Recognition mit <name>XNLPipe
+                    1.4/Stanford Core NLP 4.4.0/Modell 20 mit Liste (Sloppy)</name></change>
+            <change when="2022-09-08T09:04:53+02:00">Publikation als vereinfachte Fassung</change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <ab><pb/><lb/>Mein herrlicher <rs ref="register:gnd_118679236" 
+                    >Richard</rs>
+                <lb/>Dank für Deine Zeilen. Ich wollte <w>Mai­<lb/>Juni</w>- <hi
+                    style="text-decoration-line: underline">und</hi> Juliheft der <rs
+                    ref="register:gnd_4202203-4" type="work">Insel</rs> in e<hi
+                    style="text-decoration-line: underline">inem</hi>
+                <lb/><hi style="text-decoration-line: underline">Zuge</hi> lesen. Will aber nun Mai-
+                    <hi style="text-decoration-line: underline">und</hi>
+                <w>Juni­<lb/>heft</w> für sich lesen. Das Maiheft ist nicht <lb/>in mein. Händen.
+                Aber ich kriege es <lb/>wieder. Ich hatte es bis zum <w>Juli­<lb/>heft</w>
+                verliehen. Du kannst Dir denken, <lb/>wie außerordentich gespannt ich <lb/>grade
+                auch auf die <rs ref="register:tgn_7004909" type="place">Nordsee</rs> bin! Ich
+                <lb/>schreibe Dir dann meine <lb/>„grade‟ Meinung darüber. <lb/>In Str. 5 muß das
+                „Fortfortfortfortfortfort‟ <lb/>mit rasender Eile gesprochen werden. <lb/>Und das
+                „Halthalthalthalthalthaltsalthaltein‟ <lb/><hi
+                    style="text-decoration-line: underline">so</hi>:
+                <lb/>Halthalthalthalthalthalthalthalthaltein <lb/>Das „ein‟: geschrieen, gesungen
+                werden in <lb/>furchtbarster Angst. Das „ein‟: langgezogen. <lb/>Könnt ichs Dir doch
+                vormachen! Du würdest <lb/>erstarren. <pb/><lb/>Die drauf folgende Zeile: <lb/>„Da
+                fährt ein andrer Zug mitten hinein‟ <lb/>muß <hi
+                    style="text-decoration-line: underline">so</hi> gesprochen werden: <lb/>G<hi
+                    style="text-decoration-line: underline">an</hi>z l<hi
+                    style="text-decoration-line: underline">angsa</hi>m, jedes Wort <hi
+                    style="text-decoration-line: underline">kla</hi>r, <lb/>brutal, jedes Wort für
+                sich. <lb/>Was sagst Du zu <rs ref="registe:gnd_136307159" type="person">Byron</rs>
+                und <rs ref="register:gnd_118610465" type="Person"><lb/>Schopenhauer</rs>? Du
+                erinnerst <lb/>Dich, daß ich Dir in <rs ref="register:gnd_4094605-8" type="place"
+                    >Altona</rs>
+                <lb/>davon erzählte. <lb/>Mit vielen Grüßen an <lb/>Frau <rs
+                    ref="register:gnd_118679229" type="person">Isi</rs> und Dich. Dein <rs
+                    ref="register:gnd_118572954" type="place"><lb/>Detlev</rs>, bei dem <lb/>sich
+                eine Reihe Sicilianen (<hi style="text-decoration-line: line-through">und</hi> die
+                <lb/>4. und wohl auch die letzte) <w>ankün­<lb/>digt</w>. </ab>
+        </body>
+    </text>
+</TEI>
