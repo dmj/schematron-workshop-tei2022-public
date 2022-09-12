@@ -1,5 +1,3 @@
-/* Following are the presentation styles -- edit away! */
-
 body {
     background: white;
     font-size: 2em;
@@ -24,6 +22,29 @@ footer {
     padding: 1em 0;
 }
 
+article code {
+    font-weight: bold;
+    color: #533;
+}
+
+article pre {
+    color: #533;
+    font-size: 70%;
+}
+
+article pre code {
+    display: block;
+}
+
+dd + dt {
+    margin-top: 1em;
+}
+
+.warn::before {
+    content: " ⚠ ";
+}
+
+
 #footer h1, #footer h2 {
     display: block;
     padding: 0 1em;
@@ -34,9 +55,22 @@ footer {
 }
 
 
-:link, :visited {text-decoration: none; color: #00C;}
-#controls :active {color: #88A !important;}
-#controls :focus {outline: 1px dotted #227;}
+:link, :visited {
+    text-decoration: none;
+    color: #00C;
+}
+
+#controls {
+    display: none;
+}
+
+#controls :active {
+    color: #88A !important;
+}
+
+#controls :focus {
+    outline: 1px dotted #227;
+}
 
 ul, pre {margin: 0; line-height: 1em;}
 html, body {margin: 0; padding: 0;}
@@ -51,11 +85,7 @@ blockquote b i {font-style: italic;}
 kbd {font-weight: bold; font-size: 1em;}
 sup {font-size: smaller; line-height: 1px;}
 
-article code {padding: 2px 0.25em; font-weight: bold; color: #533;}
-article code.bad, code del {color: red;}
-article code.old {color: silver;}
-article pre {padding: 0; margin: 0.25em 0 0.5em 0.5em; color: #533; font-size: 90%;}
-article pre code {display: block;}
+
 article ul {margin-left: 5%; margin-right: 7%; list-style: disc;}
 article li {margin-top: 0.75em; margin-right: 0;}
 article ul ul {line-height: 1;}
@@ -99,13 +129,13 @@ div#controls form {position: absolute; bottom: 0; right: 0; width: 100%;
 
 #currentSlide {text-align: center; font-size: 0.5em; color: #449;}
 
-#slide0 {padding-top: 3.5em; font-size: 90%;}
-#slide0 h1 {position: static; margin: 1em 0 0; padding: 0;
+.title, #slide0 {padding-top: 3.5em; font-size: 90%;}
+.title h1, #slide0 h1 {position: static; margin: 1em 0 0; padding: 0;
    font: bold 2em Helvetica, sans-serif; white-space: normal;
    color: #000; background: transparent;}
-#slide0 h2 {font: bold italic 1em Helvetica, sans-serif; margin: 0.25em;}
-#slide0 h3 {margin-top: 1.5em; font-size: 1.5em;}
-#slide0 h4 {margin-top: 0; font-size: 1em;}
+.title h2, #slide0 h2 {font: bold italic 1em Helvetica, sans-serif; margin: 0.25em;}
+.title h3, #slide0 h3 {margin-top: 1.5em; font-size: 1.5em;}
+.title h4, #slide0 h4 {margin-top: 0; font-size: 1em;}
 
 ul.urls {list-style: none; display: inline; margin: 0;}
 .urls li {display: inline; margin: 0;}

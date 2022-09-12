@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="ui/default/print.css" type="text/css"  media="print" id="slidePrint" />
     <link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
     <script src="ui/default/slides.js" type="text/javascript"></script>
+    <!-- Code hightlighting -->
+    <link rel="stylesheet" href="hljs/styles/default.min.css">
+    <script src="hljs/highlight.js" type="text/javascript"></script>
+    <script src="hljs/languages/xml.min.js" type="text/javascript"></script>
+    <script>hljs.highlightAll();</script>
   </head>
   <body>
 
@@ -35,6 +40,27 @@
       </article>
 
       <article>
+        <h1>About me</h1>
+        <ul>
+          <li>Head of research and development at the State and
+            University Library Hamburg</li>
+          <li>Liaison to digital humanities research at the University
+            of Hamburg and other higher education institutions.</li>
+          <li>Author of SchXslt, a modern implementation of the Schematron validation language</li>
+          <li>Member of the XProc.next community group</li>
+        </ul>
+      </article>
+
+      <article class="title">
+        <h1>Workshop material</h1>
+        <p>
+          <a href="https://github.com/dmj/schematron-workshop-tei2022-public">
+            https://github.com/dmj/schematron-workshop-tei2022-public
+          </a>
+        </p>
+      </article>
+
+      <article>
         <h1>Agenda</h1>
         <ol>
           <li>A one-of-its-kind schema language</li>
@@ -43,6 +69,10 @@
           <li>Advanced features (variables, abstract rules, abstract patterns)</li>
           <li>Embedding Schematron</li>
         </ol>
+      </article>
+
+      <article class="title">
+        <h1>Schematron</h1>
       </article>
 
       <article>
@@ -66,6 +96,18 @@
       </article>
 
       <article>
+        <h1>A little bit of history</h1>
+        <p>Early versions of Schematron date back to the late 1990s
+        and where published by Rick Jelliffe.</p>
+        <p>In 2006 Schematron became part of the Document Schema
+        Description Languages (DSDL) family of ISO standards. The 3rd
+        revision of ISO Schematron was published 2020, work on a 4th
+        revision is waiting a decision by the responsible ISO working
+          group.</p>
+        <p>
+      </article>
+
+      <article>
         <h1>Resources</h1>
         <ul>
           <li>Hedler et al. (2011): Schematron: Effiziente Business
@@ -73,12 +115,12 @@
           <li>Siegel, Erik (2022): Schematron.</li>
           <li>Mailinglist <a href="https://schematronist.org">schematronist.org</a></li>
           <li>Github
-          organization <a href="https://github.com/schematron">github.com/schematron</a></li>
+            organization <a href="https://github.com/schematron">github.com/schematron</a></li>
           <li>Website of Rick Jelliffe, the initial creator of
-          Schematron <a href="http://www.schematron.com">schematron.com</a></li>
+            Schematron <a href="http://www.schematron.com">schematron.com</a></li>
           <li>Schematron Users Meetup
-          @ <a href="https://xmlprague.cz">XML Prague</a>
-          and <a href="https://markupuk.org">Markup UK</a></li>
+            @ <a href="https://xmlprague.cz">XML Prague</a>
+            and <a href="https://markupuk.org">Markup UK</a></li>
         </ul>
       </article>
 
@@ -114,6 +156,410 @@
           </dd>
         </dl>
       </article>
+
+      <article>
+        <h1>Setting up Schematron</h1>
+      </article>
+
+      <article class="title">
+        <h1>Core concepts</h1>
+      </article>
+
+      <article>
+        <h1>Schematron Validation Report Language (SVRL)</h1>
+        <p>The default output of a Schematron validation is a SVRL validation report.</p>
+        <p>When used for e.g. incremental validation in
+        &lt;oXygen/&gt;, the report is hidden away and its information
+          is displayed in the GUI.</p>
+        <pre><code class="language-xml">&lt;svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+  &lt;svrl:ns-prefix-in-attribute-values prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+  &lt;svrl:active-pattern id="pattern-1"/>
+  &lt;svrl:fired-rule context="tei:rs"/>
+  &lt;svrl:failed-assert test="@type = ('organization', 'person', 'place', 'work')"
+                      location="/TEI[1]/text[1]/body[1]/p[1]/rs[1]">
+    …
+  &lt;/svrl:failed-assert>
+  …
+&lt;/svrl:schematron-output></code></pre>
+      </article>
+
+      <article>
+        <h1>Query Language Binding</h1>
+        <p>The <dfn>query language binding</dfn> defines the language
+          and conventions used in expressions.</p>
+        <p>A query language binding is formally defined in the ISO
+        specification and indicated to a Schematron processor by
+        a <code>queryBinding</code> attribute on the
+        outermost <code>schema</code> element.</p>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+  …
+&lt;/schema></code></pre>
+        <p class="warn">The default value of the <code>queryBinding</code>
+        attribute is <code>xslt</code>, meaning XSLT
+        1.0! <em>Always</em> specify the query language binding
+        explictly.</p>
+      </article>
+
+      <article>
+        <h1>Namespaces</h1>
+        <p>Schematron has its own mechanism to declare namespaces:
+          Top-level <code>ns</code> elements instead of the
+          usual <code>xmlns:*</code> attributes.</p>
+        <p>All namespaces that are used in expressions <em>must</em>
+          be declared with a <code>ns</code> element.</p>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+  …
+  &lt;ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+  …
+&lt;/schema></code></pre>
+        <p class="warn">You can't declare a namespace URI for the default namespace.</p>
+      </article>
+
+      <article>
+        <h1>Assertions</h1>
+        <p>An <dfn>assertion</dfn> is a natural-language statement
+        with an associated assertion test.</p>
+        <p>An <dfn>assertion test</dfn> is an XPath expression that is
+          run in the context of a node of the input document. </p>
+        <pre><code class="language-xml">…
+&lt;assert test="tei:profileDesc/tei:correspDesc"/>
+…
+&lt;report test="tei:correspAction[empty(tei:placeName) and empty(tei:persName)]"/>
+…</code></pre>
+        <p class="info">The <code>assert</code>
+        and <code>report</code> elements have an
+        optional <code>role</code> attribute that is commonly used to
+        indiciate severity.</p>
+      </article>
+
+      <article>
+        <h1>Messages</h1>
+        <p>Natural-language statements can use a markup and templating
+          language defined by Schematron.</p>
+        <pre><code class="language-xml">…
+&lt;assert test="tei:profileDesc/tei:correspDesc">
+  Letter &lt;value-of select="ancestor::tei:TEI/@n"/> is missing the correspondence description.
+&lt;/assert>
+…</code></pre>
+        <p>The templating language defines <code>dir</code>, <code>emph</code>, <code>name</code>, <code>span</code>, and <code>value-of</code> elements.</p>
+      </article>
+
+      <article>
+        <h1>Rules</h1>
+        <p>A <dfn>rule</dfn> is an unordered collection of assertions
+        with a rule-context expression.</p>
+        <p>The <dfn>rule-context expression</dfn> is an XPath match
+        pattern that selects the nodes for which the contained
+        assertions are tested.</p>
+        <pre>
+          <code class="language-xml">&lt;rule context="tei:titleStmt">
+  …
+&lt;/rule>
+…
+&lt;rule context="tei:rs">
+  …
+&lt;/rule></code></pre>
+        <p>The <code>rule</code> element has an
+        optional <code>role</code> attribute that is commonly used to
+        indicate severity.</p>
+      </article>
+
+      <article>
+        <h1>Patterns</h1>
+        <p>A <dfn>pattern</dfn> is an ordered collection of related rules.</p>
+        <p>The order of rules in a pattern matters. They act as an
+        if-then-else statement such that a node is only matched by the
+        (lexically) first rule of a pattern.</p>
+        <pre><code class="language-xml">&lt;pattern id="rs-internal">
+  &lt;rule context="tei:rs">
+    &lt;assert test="@type">
+      A referencing string requires a @type.
+    &lt;/assert>
+    &lt;assert test="@type = ('organization', 'person', 'place', 'work')">
+      The @type &lt;value-of select="@type"/> of a referencing string is unknown.
+    &lt;/assert>
+  &lt;/rule>
+&lt;/pattern></code></pre>
+      </article>
+
+      <article>
+        <h1>Order of rules matters – Wrong!</h1>
+        <p class="warn">This does not work as expected!</p>
+        <pre><code>&lt;pattern id="rs-internal">
+  &lt;rule context="tei:rs">
+    &lt;assert test="@type">
+      A referencing string requires a @type.
+    &lt;/assert>
+    &lt;assert test="@type = ('person', 'place')">
+      The @type &lt;value-of select="@type"/> of a referencing string is unknown.
+    &lt;/assert>
+  &lt;/rule>
+  &lt;rule context="tei:rs[@type = 'person']">
+    &lt;!-- specific checks for strings referring to persons -->
+  &lt;/rule>
+  &lt;rule context="tei:rs[@type = 'place'">
+    &lt;!-- specific checks for strings referring to places -->
+  &lt;/rule>
+&lt;/pattern></code></pre>
+      </article>
+
+      <article>
+        <h1>Order of rules matters – Right</h1>
+        <pre><code>&lt;pattern id="rs-internal">
+  &lt;rule context="tei:rs[@type = 'person']">
+    &lt;!-- specific checks for strings referring to persons -->
+  &lt;/rule>
+  &lt;rule context="tei:rs[@type = 'place'">
+    &lt;!-- specific checks for strings referring to places -->
+  &lt;/rule>
+  &lt;rule context="tei:rs">
+    &lt;assert test="@type">
+      A referencing string requires a @type.
+    &lt;/assert>
+    &lt;assert test="@type = ('person', 'place')">
+      The @type &lt;value-of select="@type"/> of a referencing string is unknown.
+    &lt;/assert>
+  &lt;/rule>
+&lt;/pattern></code></pre>
+      </article>
+
+      <article>
+        <h1>Order of rules matters</h1>
+        <p>When you extend an existing rule, don't just add rules without thinking.</p>
+        <p>If in doubt, create new patterns.</p>
+        <p>Test your Schematron with XSpec.</p>
+      </article>
+      <article>
+        <h1>Exercise 1</h1>
+        <p>A letter (<code>hansb17270.xml</code>, Letter from Detlev
+        von Liliencron to Richard Dehmel) and the central register of
+        persons, places, organizations, and literary works
+        (<code>register.xml</code>); both from the
+        project <a href="http://dehmel-digital.de">Dehmel
+            digital</a>.</p>
+        <p>Write a Schematron that performs the following checks:</p>
+        <ol>
+          <li>Every <code>rs</code> element must have
+            a <code>type</code> attribute with a value
+            of <code>organization</code>, <code>person</code>, <code>place</code>,
+            or <code>work</code>.</li>
+          <li>Every <code>rs</code> element must have
+          a <code>ref</code> attribute whose value starts with
+            'register:'.</li>
+          <li>There should be at least one <code>correspAction</code> with a date.</li>
+        </ol>
+      </article>
+
+      <article>
+        <h1>Interlude: Testing Schematron</h1>
+        <p>As your project grows, testing that your patterns, rules, and assertions work as intended becomes vital.</p>
+        <p><a href="https://xspec.io/">XSpec</a> is a unit test and
+        behaviour-driven development (BDD) framework for XSLT, XQuery,
+          and Schematron. It is well integrated into &lt;oXygen/> and also available for the commandline.</p>
+      </article>
+
+      <article>
+        <h1>XSpec example</h1>
+        <pre><code class="language-xml">&lt;xspec:description schematron="schema.sch"
+       xmlns:tei="http://www.tei-c.org/ns/1.0"
+       xmlns:xspec="http://www.jenitennison.com/xslt/xspec">
+
+  &lt;xspec:scenario label="Referencing strings">
+    &lt;xspec:scenario label="A rs element without a @type attribute">
+      &lt;xspec:context>
+        &lt;tei:rs/>
+      &lt;/xspec:context>
+      &lt;xspec:expect-assert id="assert-type-required"/>
+    &lt;/xspec:scenario>
+    …
+&lt;/xspec:description></code></pre>
+        <p>See <code>schema.xspec</code> in the <code>exercises</code> directory.</p>
+      </article>
+
+      <article>
+        <h1>Exercise 2</h1>
+        <p>Add XSpec tests for the remaining rules and assertions of exercise 1.</p>
+      </article>
+
+      <article>
+        <h1>Variables</h1>
+        <p>A <dfn>variable</dfn> gives a name to the result of an XPath expression.</p>
+        <p>They can be scoped to the schema, a pattern, or a rule.</p>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+  &lt;let name="global-scope" value="…"/>
+  &lt;pattern>
+    &lt;let name="pattern-scope" value="…"/>
+    &lt;rule context="*">
+      &lt;let name="rule-scope" value="…"/>
+    &lt;/rule>
+  &lt;/pattern>
+&lt;/schema></code></pre>
+      </article>
+
+      <article>
+        <h1>Functions &amp; keys</h1>
+        <p>The XSLT query bindings allow the use of
+        the <code>xsl:function</code> and <code>xsl:key</code>
+        instructions, and subsequently the use of <code>fn:key</code>
+          and user-defined functions.</p>
+        <p>Use functions to hide complex calculations, use keys to look up information items.</p>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2"
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  &lt;ns prefix="fn" uri="tag:dmaus@dmaus.name,2022:TEI:Workshop:Schematron"/
+  &lt;ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+  &lt;ns prefix="xs" uri="http://www.w3.org/2001/XMLSchema"/>
+  &lt;xsl:key name="prefixDef" match="tei:prefixDef" use="@ident"/>
+  &lt;xsl:function name="fn:resolve-private-uri" as="xs:string?">
+    …
+  &lt;/xsl:function>
+  …
+&lt;/schema></code></pre>
+      </article>
+
+      <article>
+        <h1>Excercise 3</h1>
+        <p>Extend the schema from exercise 1 with the following checks:</p>
+        <ol>
+          <li>The letter has a <code>prefixDef</code> for the <code>register</code> private URI scheme.</li>
+          <li>A reference to the register must point to an existing entry.</li>
+        </ol>
+      </article>
+
+      <article>
+        <h1>Abstract rules</h1>
+        <p>An <dfn>abstract rule</dfn> is a collection of assertions.</p>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+  &lt;pattern>
+    &lt;rule abstract="true" id="id-attr-mandatory">
+      &lt;assert test="@xml:id">
+        The &lt;name/> element must hava a @xml:id attribute.
+      &lt;/assert>
+    &lt;/rule>
+    &lt;rule context="tei:person | tei:place | tei:bibl | tei:org">
+      &lt;extends rule="id-attr-mandatory"/>
+      …
+    &lt;/rule>
+  &lt;/pattern>
+&lt;/schema></code></pre>
+        <p class="warn">You cannot extend an abstract rule of a different pattern.</p>
+      </article>
+
+      <article>
+        <h1>Abstract patterns</h1>
+        <p>An <dfn>abstract pattern</dfn> is a pattern template with
+          placeholders in XPath expressions.</p>
+        <p>Abstract patterns allow a common definition mechanism for
+        structures which are very similar but use different names and
+        paths.</p>
+        <p>When <dfn>instantiating</dfn> an abstract pattern, the
+        placeholders are replaced by string-values given in the
+        instantiating pattern.</p>
+        <p class="warn">Abstract pattern placeholders and variables
+        use the same syntax. Be careful not to create a collision.</p>
+      </article>
+
+      <article>
+        <h1>Abstract pattern – Example</h1>
+        <pre><code class="language-xml">&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+  &lt;ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+  &lt;pattern abstract="true" id="referencing-string">
+    &lt;rule context="tei:rs[@type = '$type']">
+      &lt;assert test="@ref">
+        The &lt;name/> element must hava a @ref attribute.
+      &lt;/assert>
+      &lt;assert test="document(@ref)//self::$elementName">
+        A &lt;name/> element with of type '&lt;value-of select="'$type'"/>' must reference
+        a &lt;value-of select="'$elementName'"/> element.
+      &lt;/assert>
+    &lt;/rule>
+  &lt;/pattern>
+  &lt;pattern id="rs-person" is-a="reference-string">
+    &lt;param name="type" value="person"/>
+    &lt;param name="elementName" value="tei:person"/>
+  &lt;/pattern>
+&lt;/schema></code></pre>
+      </article>
+
+      <article>
+        <h1>Abstract pattern – Example continued</h1>
+        <pre><code class="language-xml">…
+&lt;pattern id="rs-person">
+  &lt;rule context="tei:rs[@type = 'person']">
+    &lt;assert test="@ref">
+      The &lt;name/> element must hava a @ref attribute.
+    &lt;/assert>
+    &lt;assert test="document(@ref)/self::tei:person">
+      A &lt;name/> element with of type '&lt;value-of select="'person'"/>' must reference
+      a &lt;value-of select="'tei:person'"/> element.
+    &lt;/assert>
+  &lt;/rule>
+&lt;/pattern>
+…</code></pre>
+      </article>
+
+      <article>
+        <h1>Excercise 4</h1>
+        <p>Use abstract rules and patterns to modify the schema from
+        exercise 3 with the following checks:</p>
+        <ol>
+          <li>Every <code>bibl</code>, <code>org</code>, <code>person</code>, and <code>place</code> element must have an <code>xml:id</code> attribute.</li>
+          <li>A <code>rs</code> of @type <code>person</code> must
+          point to a <code>person</code> element, a
+          @type <code>place</code> to a <code>place</code> element, a
+          @type <code>organization</code> to a <code>org</code>
+          element, and a @type <code>work</code> to
+          a <code>bibl</code> element.</li>
+        </ol>
+      </article>
+
+      <article class="title">
+        <h1>Embedding Schematron</h1>
+      </article>
+      <article>
+        <h1>TEI ODD schema and documentation language</h1>
+        <p>The TEI ODD schema and documentation language uses
+          Schematron to express constraints to content models of
+          elements and attributes.</p>
+        <p>Rules for embedding Schematron are <em>not</em>
+          standardized by ISO: How embeddings are processed is
+          processor-dependent.</p>
+      </article>
+
+      <article>
+        <h1>Embedded Schematron example 1</h1>
+        <pre><code class="language-xml">&lt;elementSpec module="tagdocs" ident="constraintSpec"
+             xmlns:sch="http://purl.oclc.org/dsdl/schematron" >
+
+  &lt;constraintSpec ident="isosch" scheme="schematron">
+    &lt;desc xml:lang="en" versionDate="2018-07-06">…&lt;/desc>
+    &lt;constraint>
+      &lt;sch:ns prefix="sch" uri="http://purl.oclc.org/dsdl/schematron"/>
+      &lt;sch:report test="tei:constraint/sch:*  and  not( @scheme eq 'schematron')">Rules
+        in the ISO Schematron language must be inside a constraintSpec
+        with the value 'schematron' on the scheme attribute&lt;/sch:report>
+    &lt;/constraint>
+  &lt;/constraintSpec>
+
+&lt;/elementSpec></code></pre>
+      </article>
+
+      <article>
+        <h1>Embedding Schematron -- My take</h1>
+        <dl>
+          <dt>Pro</dt>
+          <dd>Keep schema and documentation closely together</dd>
+          <dt>Con</dt>
+          <dd>
+            Processor-dependent and underspecified
+            <ul>
+              <li>Query language binding?</li>
+              <li>XSLT functions and keys?</li>
+              <li>Localization?</li>
+            </ul>
+          </dd>
+        </dl>
+      </article>
+
     </main>
 
   </body>
